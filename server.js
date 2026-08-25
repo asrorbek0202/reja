@@ -2,6 +2,16 @@ console.log("Web Serverni boshlash");
 const express = require("express");
 const app = express();
 const http = require("http");
+const fs = require("fs")
+
+let user;
+fs.readFile("database/user.json", "utf8", (err, data) => {
+  if(err){
+    console.log("ERROR", err);
+  }else{
+    user = JSON.parse(data)
+  }
+})
 
 // Rejalarni saqlaydigan massiv (Array)
 let plans = ["Dasturlashni o'rganish", "Kitob o'qish"];
@@ -20,6 +30,10 @@ app.set("view engine", "ejs");
 // READ: Bosh sahifada barcha rejalarni ko'rsatish
 app.get("/", function (req, res) {
   res.render("harid", { items: plans });
+});
+
+app.get("/author", function (req, res) {
+  res.render("author", {user: user});
 });
 
 // CREATE: Yangi reja qo'shish
