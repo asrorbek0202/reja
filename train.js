@@ -1,3 +1,51 @@
+
+// B- Task
+// Shunday function tuzing, u 1ta string parametrga ega bolsin, hamda osha stringda qatnashgan raqamlarni sonini bizga return qilsin.
+// MASALAN countDigits("ad2a54y79wet0sfgb9") 7ni return qiladi.
+
+
+// function countDigits(word, callback) {
+//   let count = 0;
+//   if (typeof word !== "string") {
+//     callback("wrong choice", null);
+//   } else {
+//     for (let i = 0; i < word.length; i++) {
+//       count++;
+//     }
+//     callback(null, count);
+//   }
+// }
+
+// countDigits("independency", (err, data) => {
+//   if (err) {
+//     console.log("ERROR:", err);
+//   } else {
+//     console.log("Javob:", data); 
+//   }
+// });
+
+
+
+// A-TASK: 
+
+// Shunday 2 parametrli function tuzing, hamda birinchi parametrdagi letterni ikkinchi parametrdagi sozdan qatnashga sonini return qilishi kerak boladi.
+// MASALAN countLetter("e", "engineer") 3ni return qiladi.
+
+// function countLetter(xarf, word, callback) {
+//   let count = 0;
+//   for (let letter of word) {
+//     if (letter === xarf) {
+//       count++;
+//     }
+//   }
+//   callback(count);
+// }
+
+// countLetter("e", "engineer", (result) => {
+//   console.log("natija:", result); 
+// });
+
+
 // console.log("Jack Ma maslahatlari:")
 // const list = [
 //     "yaxshi talaba boling", // 0-20
