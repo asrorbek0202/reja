@@ -1,4 +1,72 @@
 
+// C -TASK
+// Shunday class tuzing tuzing nomi Shop, va uni constructoriga 3 hil mahsulot pass bolsin, hamda classning 3ta methodi bolsin, biri qoldiq, biri sotish va biri qabul. Har bir method ishga tushgan vaqt ham log qilinsin.
+// MASALAN: const shop = new Shop(4, 5, 2); shop.qoldiq() return hozir 20:40da 4ta non, 5ta lagmon va 2ta cola mavjud! shop.sotish('non', 3) & shop.qabul('cola', 4) & shop.qoldiq() return hozir 20:50da 1ta non, 5ta lagmon va 6ta cola mavjud!
+const moment = require("moment");
+
+class Shop {
+  constructor(non, lagmon, cola) {
+    this.non = non;
+    this.lagmon = lagmon;
+    this.cola = cola;
+  }
+
+  getTime() {
+    return moment().format("HH:mm");
+  }
+
+  qoldiq() {
+    return `hozir ${this.getTime()}da ${this.non}ta non, ${this.lagmon}ta lagmon va ${this.cola}ta cola mavjud!`;
+  }
+
+  async sotish(mahsulot, miqdor) {
+    if (this[mahsulot] === undefined) {
+      throw new Error(`Bizda '${mahsulot}' mahsuloti sotilmaydi!`);
+    }
+
+    if (this[mahsulot] < miqdor) {
+      throw new Error(`Omborda yetarli ${mahsulot} yo'q`);
+    }
+
+    this[mahsulot] -= miqdor;
+    return `hozir ${this.getTime()}da ${miqdor}ta ${mahsulot} sotildi`;
+  }
+
+  async qabul(mahsulot, miqdor) {
+    if (this[mahsulot] === undefined) {
+      throw new Error(`Biz faqat mavjud mahsulotlarni qabul qila olamiz`);
+    }
+
+    this[mahsulot] += miqdor;
+    return `hozir ${this.getTime()}da ${miqdor}ta ${mahsulot} qabul qilindi`;
+  }
+}
+
+const shop = new Shop(3, 7, 9);
+
+async function run() {
+  try {
+    console.log(shop.qoldiq());
+
+    let javob = await shop.sotish("non", 3);
+    console.log(javob);
+
+    javob = await shop.qabul("cola", 4);
+    console.log(javob);
+
+    console.log(shop.qoldiq());
+
+    javob = await shop.sotish("non", 10);
+    console.log(javob);
+  } catch (err) {
+    console.log("XATOLIK:", err.message);
+  }
+}
+
+run();
+
+
+
 // B- Task
 // Shunday function tuzing, u 1ta string parametrga ega bolsin, hamda osha stringda qatnashgan raqamlarni sonini bizga return qilsin.
 // MASALAN countDigits("ad2a54y79wet0sfgb9") 7ni return qiladi.
