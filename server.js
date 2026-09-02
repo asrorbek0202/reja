@@ -1,9 +1,10 @@
 
-const mongodb = require("mongodb");
 const http = require("http");
 
-// let db;
-const connectionString = "mongodb+srv://asrorbek:Steve2710@cluster0.bbubr7d.mongodb.net/Reja";  // 1-savol
+const mongodb = require("mongodb");
+
+let db;
+const connectionString = "mongodb+srv://asrorbek:Steve2710@cluster0.bbubr7d.mongodb.net/Reja"; 
 
 mongodb.connect(
   connectionString,
@@ -12,10 +13,10 @@ mongodb.connect(
     useUnifiedTopology: true,
   },
   (err, client) => {
-    if (err) {
-      console.log("ERROR on connection MongoDB:", err);
-    } else {
-      console.log("MongoDB connection succeeded");
+    if (err) console.log("ERROR on connection MongoDB");
+    else {
+      console.log("MongoDB connection succeed");
+
       module.exports = client;
 
       const app = require("./app");
@@ -23,9 +24,9 @@ mongodb.connect(
       let PORT = 3000;
       server.listen(PORT, function () {
         console.log(
-          `The server is running on port ${PORT}, http://localhost:${PORT}`
+          `The server is running successfully on port: ${PORT}, http://localhost:${PORT}`,
         );
       });
     }
-  }
+  },
 );
