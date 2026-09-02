@@ -35,8 +35,7 @@ document.getElementById("create-form").addEventListener("submit", function (e) {
 });
 
 document.addEventListener("click", function (e) {
-  // delete operation
-  console.log(e.target);
+  // delete oper
   if (e.target.classList.contains("delete-me")) {
     if (confirm("Are you sure to delete this item?")) {
       axios
@@ -51,8 +50,32 @@ document.addEventListener("click", function (e) {
     }
   }
 
-  // edit operation
+  // edit oper
   if (e.target.classList.contains("edit-me")) {
-    alert("Edit button clicked");
+    let userInput = prompt("O'zgartirish kiriting", e.target.parentElement.parentElement.querySelector(".item-text").innerHTML
+  );
+    if (userInput) {
+      axios
+        .post("/edit-item", {
+          id: e.target.getAttribute("data-id"),
+          new_input: userInput,
+        })
+        .then((response) => {
+          console.log(response.data);
+          e.target.parentElement.parentElement.querySelector(".item-text").innerHTML = userInput;
+        })
+        .catch(err => {
+          console.log("Please try AGAIN");
+        });
+    }
   }
 });
+
+document.getElementById("clean-all").addEventListener("click", function () {
+  axios
+    .post("/delete-all", {delete_all: true})
+    .then(response => {
+      alert(response.data.state);
+      document.location.reload();
+    })
+  });
