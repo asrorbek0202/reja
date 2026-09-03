@@ -1,19 +1,21 @@
 
 const http = require("http");
-
+require("dotenv").config(); 
 const mongodb = require("mongodb");
 
 let db;
-const connectionString = "mongodb+srv://asrorbek:Steve2710@cluster0.bbubr7d.mongodb.net/Reja"; 
+const connectionString = process.env.MONGO_URL;
+
+const PORT = process.env.PORT || 3000;
 
 mongodb.connect(
   connectionString,
   {
-    useNewUrlParser: true,
+    useNewUrlParser: true, 
     useUnifiedTopology: true,
   },
   (err, client) => {
-    if (err) console.log("ERROR on connection MongoDB");
+    if (err) console.log("ERROR on connection MongoDB",err);
     else {
       console.log("MongoDB connection succeed");
 
@@ -21,7 +23,6 @@ mongodb.connect(
 
       const app = require("./app");
       const server = http.createServer(app);
-      let PORT = 3000;
       server.listen(PORT, function () {
         console.log(
           `The server is running successfully on port: ${PORT}, http://localhost:${PORT}`,
