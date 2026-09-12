@@ -6,7 +6,7 @@ const mongodb = require("mongodb");
 let db;
 const connectionString = process.env.MONGO_URL;
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8012;
 
 mongodb.connect(
   connectionString,
