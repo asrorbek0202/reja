@@ -52,7 +52,7 @@ document.addEventListener("click", function (e) {
 
   // edit oper
   if (e.target.classList.contains("edit-me")) {
-    let userInput = prompt("O'zgartirish kiriting", e.target.parentElement.parentElement.querySelector(".item-text").innerHTML
+    let userInput = prompt("O'zgartirish kiriting", e.target.parentElement.parentElement.querySelector(".item-text").innerHTML.trim()
   );
     if (userInput) {
       axios

@@ -31,7 +31,7 @@ app.set("view engine", "ejs");
 app.post("/create-item", (req, res) => {
   console.log("user entered /create-item");
 
-  const new_reja = req.body.reja;
+  const new_reja = req.body.reja.trim();
   db.collection("plans").insertOne({ reja: new_reja }, (err, data) => {
     console.log(data.ops);
     res.json(data.ops[0]);
@@ -51,7 +51,8 @@ app.post("/delete-item", (req, res) => {
 
 app.post("/edit-item", (req, res) => {
   const data = req.body;
- console.log(data);
+  data.new_input = data.new_input.trim();
+  console.log(data);
   db.collection("plans").findOneAndUpdate({_id: new mongodb.ObjectId(data.id)}, {$set: {reja: data.new_input}}, function(err, data){
     res.json({state: "success"});
   });
